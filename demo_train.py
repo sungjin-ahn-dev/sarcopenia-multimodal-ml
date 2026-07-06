@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-합성 데이터 데모: 5-fold GBDT 학습 → CV 평가 → 외부(확증) 검증.
-
-Run:
-  python data/make_synthetic.py   # 먼저 합성 데이터 생성
-  python demo_train.py
-
-Writes:
-  ml_result/use_all/GBDT/{fold:03d}.pkl   -- eval_cv_average()가 읽는 포맷
-  external_fold_roc_curves.png            -- 외부 검증 fold별 ROC
-"""
+# 합성 데이터 데모. 5-fold GBDT 학습 -> CV 평균 -> 외부검증까지 한 번에.
+# 돌리기 전에 data/make_synthetic.py 먼저 실행해서 csv 만들어둘 것.
+# fold별 pkl은 eval_cv_average()가 읽는 포맷 그대로 저장.
 from __future__ import annotations
 
 import numpy as np

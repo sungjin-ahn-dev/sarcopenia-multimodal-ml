@@ -1,21 +1,8 @@
 # -*- coding: utf-8 -*-
-"""
-Synthetic sample-data generator.
-
-이 저장소에는 실제 피험자/환자 데이터가 포함되어 있지 않습니다. 이 스크립트가
-연구에 사용된 것과 동일한 스키마의 '가짜' 데이터를 생성하며, 학습·평가
-파이프라인은 이 합성 데이터 위에서 그대로 동작합니다.
-
-Generates:
-  data/csv/datasetA.csv   -- 5-fold 학습/검증/테스트용 (283명, 유병률 ~15%)
-  data/csv/external.csv   -- 외부(확증) 검증용 (279명)
-
-Design: 근감소증 양성군은 고령·저근육량(SMI)·저악력(IBgrip_MAX) 방향으로
-분포를 이동시키고, 터치/스와이프 상호작용 피처에도 약한 신호를 부여한다.
-
-Run:
-  python data/make_synthetic.py
-"""
+# 실제 피험자 데이터는 repo에 안 올림. 대신 같은 스키마의 합성 데이터를 찍어내서
+# 학습/평가 파이프라인이 그 위에서 돌아가게 함.
+# 양성군은 고령 + 저SMI + 저악력 쪽으로 분포 shift, 터치/스와이프에도 약한 신호만.
+# datasetA.csv = 5-fold 용, external.csv = 외부검증 용.
 from __future__ import annotations
 
 from pathlib import Path
