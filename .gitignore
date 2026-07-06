@@ -1,0 +1,24 @@
+# 생성 산출물 — 파이프라인으로 재현 (README 참고)
+data/csv/
+data/audio/
+ml_result/
+external_roc_curves/
+catboost_info/
+*.pkl
+external_fold_auc_results.csv
+
+# 데이터 (실데이터는 저장소에 없음)
+*.csv
+!config/*.csv
+*.xlsx
+*.mp4
+*.flac
+*.wav
+
+__pycache__/
+*.pyc
+.DS_Store
+desktop.ini
+.vscode/
+venv/
+.venv/
