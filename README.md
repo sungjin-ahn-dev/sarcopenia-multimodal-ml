@@ -32,31 +32,9 @@
 
 ## 2. 파이프라인
 
-```mermaid
-flowchart LR
-    subgraph SRC["📥 멀티모달 원천 (합성 생성기로 재현)"]
-        A["체성분·악력<br/>SEX·Age·BMI·SMI·IBgrip"]
-        B["음성 6과제<br/>MFCC·pitch·formant …"]
-        C["터치/스와이프<br/>FFT 상호작용 피처"]
-    end
-
-    subgraph PREP["🧱 전처리 · 데이터셋 구성"]
-        D["preprocess_audio<br/>librosa·parselmouth·opensmile"]
-        E["feature_extraction<br/>터치/스와이프 FFT 피처"]
-        F["make_set<br/>사이트·클래스 층화 5-fold"]
-    end
-
-    subgraph ML["🤖 학습 · 평가"]
-        G["ml_manager<br/>LR·NB·KNN·DT·SVM·CatBoost·GBDT·LGBM<br/>+ SMOTE 오버샘플링 · 투표 앙상블"]
-        H["threshold_utils<br/>Youden-J 임계값 최적화"]
-        I["eval_tool<br/>Acc/Sen/Spe/PPV/NPV/F1·이항 CI"]
-    end
-
-    J["🔬 external_eval<br/>외부 사이트 검증<br/>부트스트랩 AUC 95% CI + ROC"]
-
-    A & B & C --> D & E --> F --> G --> H --> I
-    G --> J
-```
+<p align="center">
+  <img src="docs/img/pipeline.png" width="920" alt="근감소증 예측 파이프라인">
+</p>
 
 ## 3. 외부(확증) 검증 결과
 

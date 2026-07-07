@@ -312,7 +312,7 @@ def _plot_fold_roc_curves(roc_data_list, mean_auc):
                  label=f'AUC = {auc_score:.3f}')
         
         # 대각선 그리기
-        plt.plot([0, 1], [0, 1], 'k--', lw=1.5, label='Chance (AUC = 0.500)')
+        plt.plot([0, 1], [0, 1], '--', color="#8b949e", lw=1.5, label='Chance (AUC = 0.500)')
         
         # 레이블 및 타이틀 설정
         plt.xlim([-0.02, 1.02])
@@ -355,21 +355,28 @@ def _plot_fold_roc_curves(roc_data_list, mean_auc):
                  label=f'AUC = {auc_score:.3f}')
     
     # 대각선 그리기
-    plt.plot([0, 1], [0, 1], 'k--', lw=1.5, label='Chance (AUC = 0.500)')
+    plt.plot([0, 1], [0, 1], '--', color="#8b949e", lw=1.5, label='Chance (AUC = 0.500)')
     
     # 레이블 및 타이틀 설정
     plt.xlim([-0.02, 1.02])
     plt.ylim([-0.02, 1.02])
-    plt.xlabel('False Positive Rate', fontsize=12)
-    plt.ylabel('True Positive Rate', fontsize=12)
-    plt.title(f'ROC Curve by Fold (Mean AUC = {mean_auc:.3f})', fontsize=14)
-    plt.legend(loc="lower right", fontsize=10)
-    plt.grid(alpha=0.3, linestyle='--')
+    _NC = "#8b949e"  # 라이트/다크 양쪽에서 읽히는 중립 회색
+    ax = plt.gca()
+    plt.xlabel('False Positive Rate', fontsize=12, color=_NC)
+    plt.ylabel('True Positive Rate', fontsize=12, color=_NC)
+    plt.title(f'ROC Curve by Fold (Mean AUC = {mean_auc:.3f})', fontsize=14, color=_NC)
+    _leg = plt.legend(loc="lower right", fontsize=10)
+    for _t in _leg.get_texts():
+        _t.set_color(_NC)
+    ax.tick_params(colors=_NC)
+    for _s in ax.spines.values():
+        _s.set_color(_NC)
+    plt.grid(alpha=0.25, linestyle='--')
     plt.tight_layout()
-    
-    # 통합 파일 저장
+
+    # 통합 파일 저장 (배경 투명)
     combined_path = os.path.join(output_dir, "roc_all_folds_combined.png")
-    plt.savefig(combined_path, dpi=300, bbox_inches='tight')
+    plt.savefig(combined_path, dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
     
     print(f"[Saved] {combined_path}")
